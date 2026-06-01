@@ -10,17 +10,6 @@ class IntegerPrimitivesMother(ObjectMother):
         return cls._faker().random_int()
 
     @classmethod
-    def create(cls, is_positive: bool | None = None, min_value: int = -10000, max_value: int = 1000) -> int:
-        """Generate an int value with specified constraints."""
-        if is_positive:
-            return cls._faker().random_int(min=1, max=abs(max_value))
-
-        if is_positive is False:
-            return cls._faker().random_int(min=-abs(min_value), max=-1)
-
-        return cls._faker().random_int(min=min_value, max=max_value)
-
-    @classmethod
     def positive(cls) -> int:
         """Generate a positive int value greater than zero."""
         return cls._faker().random_int(min=1)
