@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: object-mother-sindri
+message: If you use this software, please cite it using the metadata below.
+type: software
+authors:
+  - given-names: dimanu-py
+repository-code: https://github.com/dimanu-py/object-mother-sindri/
+url: https://pypi.org/project/object-mother-sindri/
+abstract: >
+    Implementation of  object mother pattern to be reused among projects
+keywords:
+  - python
+license: MIT

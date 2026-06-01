@@ -1,0 +1,114 @@
+[project]
+name = "object-mother-sindri"
+version = "0.0.1"
+description = "Object Mother pattern implementation for Python"
+authors = [{name = "dimanu-py", email = "dimanu.py@gmail.com"}]
+dependencies = [
+    "faker"
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = [
+    "object mother",
+    "object-mother",
+    "object mothers",
+    "object-mothers",
+    "Object Mother",
+    "testing",
+    "bdd",
+    "unit tests",
+    "design patterns",
+    "domain driven design",
+    "ddd",
+    "clean architecture",
+    "hexagonal architecture",
+]
+classifiers = [
+    "Typing :: Typed",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Libraries",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Testing :: Unit",
+    "Topic :: Software Development :: Testing :: BDD",
+    "Topic :: Software Development",
+]
+
+[dependency-groups]
+dev = [
+    {include-group = "lint"},
+    {include-group = "test"},
+    {include-group = "release"},
+]
+release = [
+    "python-semantic-release",
+]
+lint = [
+    "mypy",
+    "ruff",
+    "pip-audit",
+    "pre-commit",
+]
+test = [
+    "expects>=0.9.0",
+    "pytest",
+    "pytest-sugar>=1.1.1",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "C4", "UP", "I"]
+ignore = ["B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src", "test"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+[project.optional-dependencies]
+build = ["uv>=0.7.21"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+commit_message = "bump: new version {version} created"
+commit_parser = "conventional"
+major_on_zero = false
+allow_zero_version = true
+no_git_verify = false
+tag_format = "{version}"
+build_command = """
+    pip install -e '.[build]'
+    uv lock --upgrade-package object-mother-sindri
+    git add uv.lock
+"""
+
+[tool.semantic_release.commit_parser_options]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf", "refactor", "test", "build"]
+allowed_tags = ["feat", "fix", "refactor", "perf", "build"]
+default_bump_level = 0
+parse_squash_commits = false
+ignore_merge_commits = true
+
+[tool.semantic_release.changelog]
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = ['''^Merge pull request #''', '''^Merge branch ''']
+mode = "update"
+#template_dir = "docs/changelog"
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG"
+output_format = "md"
+mask_initial_release = false
