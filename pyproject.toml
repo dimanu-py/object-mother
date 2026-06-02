@@ -116,7 +116,7 @@ include = [
 ]
 
 [project.optional-dependencies]
-build = ["uv ~= 0.7.12"]
+build = ["uv >= 0.11.17"]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
