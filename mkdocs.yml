@@ -1,9 +1,8 @@
-site_name: Sindri
+site_name: Object Mother Sindri
 site_url: https://dimanu-py.github.io/object-mother-sindri
 site_description: >
-  A tool to help you create value objects, validate domain logic, ensure data integrity 
-  and generate test data in your Python applications.
-repo_name: sindripy
+  Object Mother pattern implementation for generating realistic test data in your Python applications.
+repo_name: dimanu-py/object-mother-sindri
 repo_url: https://github.com/dimanu-py/object-mother
 docs_dir: docs/documentation
 extra:

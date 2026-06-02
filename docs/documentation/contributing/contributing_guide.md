@@ -7,7 +7,7 @@ your help makes the library better for everyone.
 
 1. **Search first**: check for existing [issues](https://github.com/dimanu-py/object-mother/issues) before opening a new one. You might
    find that your issue has already been reported or even fixed in a pull request.
-2. **Security issues**: report privately via our [`Security Policy`](https://dimanu-py.github.io/sindri/home/security/); **do not** raise a public issue for vulnerabilities.
+2. **Security issues**: report privately via our [`Security Policy`](https://dimanu-py.github.io/object-mother/blob/main/SECURITY.md); **do not** raise a public issue for vulnerabilities.
 
 ## Start Contributing
 
@@ -23,7 +23,7 @@ All contributions have some common steps, whether you're fixing a bug, adding a 
 2. **Clone Your Fork**:
 
     ```bash
-    git clone git+ssh://git@github.com/<your-username>/sindri.git
+    git clone git+ssh://git@github.com/<your-username>/object-mother.git
     ```
 
 3. **Setup the Development Environment**: Create a virtual environment, install all dependencies, and setup custom pre-commit hooks.
@@ -60,7 +60,7 @@ If you want to implement a new feature, fix a bug, or improve the codebase, it's
 
     ```bash
     git add .
-    git commit -m "feat(value-object-sindri): implement positive integer value object" -S --signoff  # we only accept signed and signed-off commits
+    git commit -m "feat(object-mother): implement positive integer mother method" -S --signoff  # we only accept signed and signed-off commits
     ```
 
 4. **Push Your Changes**: Push your changes to your fork.
@@ -69,14 +69,14 @@ If you want to implement a new feature, fix a bug, or improve the codebase, it's
     git push -u origin feat/<branch-name>
     ```
 
-5. **Open a Pull Request**: Open a pull request against the `main` branch and fill out our [`pull request template`](https://github.com/dimanu-py/sindri/blob/main/.github/pull_request_template.md).
+5. **Open a Pull Request**: Open a pull request against the `main` branch and fill out our [`pull request template`](https://github.com/dimanu-py/object-mother/blob/main/.github/pull_request_template.md).
 
     !!! info "Pull Request Guidelines"
         More information about our pull request guidelines and feedback can be found in the [Pull Request Guidelines](#pull-request-guidelines) section.
 
 ### Contributing with Documentation
 
-If you want to contribute to the documentation, you can do so by editing the Markdown files in the `docs` directory.
+If you want to contribute to the documentation, you can do so by editing the Markdown files in the `docs/documentation` directory.
 The documentation is built using [MkDocs](https://www.mkdocs.org/) and can be previewed locally running the following command:
 
 ```bash
@@ -92,7 +92,7 @@ Once you have made your changes, you can follow these steps to contribute:
 
     ```bash
     git add .
-    git commit -m "docs: improve documentation for custom value objects" -S --signoff  # we only accept signed and signed-off commits
+    git commit -m "docs: improve documentation for custom object mothers" -S --signoff  # we only accept signed and signed-off commits
     ```
 
 2. **Push Your Changes**: Push your changes to your fork.
@@ -101,7 +101,7 @@ Once you have made your changes, you can follow these steps to contribute:
     git push -u origin feat/<branch-name>
     ```
 
-3. **Open a Pull Request**: Open a pull request against the `main` branch and fill out our [`pull request template`](https://github.com/dimanu-py/sindri/blob/main/.github/pull_request_template.md).
+3. **Open a Pull Request**: Open a pull request against the `main` branch and fill out our [`pull request template`](https://github.com/dimanu-py/object-mother/blob/main/.github/pull_request_template.md).
 
     !!! info "Pull Request Guidelines"
         More information about our pull request guidelines and feedback can be found in the [Pull Request Guidelines](#pull-request-guidelines) section.
@@ -113,9 +113,6 @@ Once you have made your changes, you can follow these steps to contribute:
 This project follows **[Conventional Commits](https://www.conventionalcommits.org)** enforced by
 **[Commitizen](https://commitizen-tools.github.io)** as a pre-commit hook and
 **[Semantic Versioning](https://semver.org)** used by [python-semantic-release](https://python-semantic-release.readthedocs.io).
-
-!!! info "Versioning"
-    More information about versioning and releases can be found in the [Releases](https://dimanu-py.github.io/sindri/home/releases/) page.
 
 !!! important "Signed and Signed-off Commits Required"
     This repository only accepts signed and signed-off commits, check [GitHub documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) if you need help with that.
@@ -143,7 +140,7 @@ This project follows **[Conventional Commits](https://www.conventionalcommits.or
 !!! important
     Only code owners are allowed to merge a pull request.
 
-- Use our [`pull request template`](https://github.com/dimanu-py/sindri/blob/main/.github/pull_request_template.md).
+- Use our [`pull request template`](https://github.com/dimanu-py/object-mother/blob/main/.github/pull_request_template.md).
 - **Keep PRs Focused**: Submit one logical change per pull request. Avoid bundling unrelated changes together.
 - **Descriptive Titles and Summaries**: Use clear, descriptive PR titles and fill out all sections of the PR template, especially the motivation and context.
 - **Reference Issues**: Link related issues by number (e.g., `Closes #123`) to enable automatic closing and better tracking.
@@ -171,11 +168,7 @@ We follow [Conventional Comments](https://conventionalcomments.org) to keep revi
 !!! important "UNIX System Required"
     All default project commands require **GNU Make** and are intended to be run on a **UNIX system**.
 
-
-!!! important "UV Required"
-    You must have [**UV**](https://docs.astral.sh/uv/) installed to use the most of the default project commands.
-
-The project provides a [`Makefile`](https://github.com/dimanu-py/sindri/blob/main/makefile) with some helpful commands,
+The project provides a [`Makefile`](https://github.com/dimanu-py/object-mother/blob/main/makefile) with some helpful commands,
 this commands must be run from the root of the project. For more details on each command, run `make help`.
 
 - **Environment Setup:** Run `make local-setup` to create a virtual environment, install all dependencies (development + production), and install pre-commit hooks.
@@ -202,4 +195,4 @@ If you find this library useful and want to help, you can also give it a star on
 [![Donate](https://img.shields.io/badge/Buy_me_a_coffee-5d83f5?style=for-the-badge&logo=ko-fi&logoColor=white&__cf_chl_managed_tk__=pmd_sOkOcrsQ4T6MRVPX2TeB_mbk2ZryAIn3rNigWIBBC6U-1633993526-0-gqNtZGzNAyWjcnBszQkl)](https://buymeacoffee.com/dimanu.py)
 
 
-_Thank you for helping make **object-mother-sindri** packages awesome!_
+_Thank you for helping make **Sindri Object Mother** package awesome!_

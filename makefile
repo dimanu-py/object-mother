@@ -129,7 +129,7 @@ docs-serve:  ## Start server for documentation.
 
 .PHONY: watch
 watch:  ## Run all test with every change.
-	@uv run ptw --runner "pytest packages/value_objects/test -ra"
+	@uv run ptw --runner "pytest test -ra"
 
 .PHONY: opencode
 opencode:  ## Create symlinks for OpenCode compatibility.

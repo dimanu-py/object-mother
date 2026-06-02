@@ -1,12 +1,12 @@
-# Sindri: Object Mother
+# Object Mother Sindri
 
 ### Object Mother pattern for Python test data generation
 
 Easy use and customizable implementation for the Object Mother pattern.
 
 <p align="center">
-  <a href="https://dimanu-py.github.io/sindri/getting_started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
-  <a href="https://dimanu-py.github.io/sindri/object_mothers/">Object Mother Pattern</a>
+  <a href="https://dimanu-py.github.io/object-mother-sindri/getting_started/">Getting Started</a>&nbsp;&nbsp;•&nbsp;
+  <a href="https://dimanu-py.github.io/object-mother-sindri/object_mothers/">Object Mother Pattern</a>
 </p>
 
 <div align="center"><table><tr><td>
@@ -51,15 +51,15 @@ random_name = StringPrimitivesMother.any()
 
 ## Next Steps
 
-- [Installation](https://dimanu-py.github.io/sindri/getting_started/installation/)
-- [First Steps](https://dimanu-py.github.io/sindri/getting_started/first_steps/)
-- [Object Mother Pattern](https://dimanu-py.github.io/sindri/object_mothers/)
-- [Contributing Guide](https://dimanu-py.github.io/sindri/contributing/contributing_guide/)
+- [Installation](https://dimanu-py.github.io/object-mother-sindri/getting_started/installation/)
+- [First Steps](https://dimanu-py.github.io/object-mother-sindri/getting_started/first_steps/)
+- [Object Mother Pattern](https://dimanu-py.github.io/object-mother-sindri/object_mothers/)
+- [Contributing Guide](https://dimanu-py.github.io/object-mother-sindri/contributing/contributing_guide/)
 
 <div style="background-color: #1e2d3d; border: 1px solid #00d9ff; border-radius: 8px; padding: 16px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px;">
   <div style="font-size: 20px; color: #00d9ff; flex-shrink: 0;">ℹ️</div>
   <div>
     <strong style="color: #00d9ff;">Learn More</strong><br>
-    <span style="color: #a0a0a0;">To learn more about the object mother pattern, built-in mothers, and how to create custom mothers, visit the <a href="https://dimanu-py.github.io/sindri/object_mothers" style="color: #00d9ff; text-decoration: none;">Object Mother Pattern</a> section of the documentation.</span>
+    <span style="color: #a0a0a0;">To learn more about the object mother pattern, built-in mothers, and how to create custom mothers, visit the <a href="https://dimanu-py.github.io/object-mother-sindri/object_mothers" style="color: #00d9ff; text-decoration: none;">Object Mother Pattern</a> section of the documentation.</span>
   </div>
 </div>

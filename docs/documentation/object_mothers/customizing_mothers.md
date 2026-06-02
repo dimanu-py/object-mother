@@ -19,40 +19,79 @@ from object_mother import ObjectMother
 
 class UserMother(ObjectMother):
     @classmethod
-    def any(cls) -> dict:
+    def any(cls) -> User:
         faker = cls._faker()
-        return {
-            "username": faker.user_name(),
-            "email": faker.email(),
-            "age": faker.random_int(min=18, max=100)
-        }
+        return User(
+            username=faker.user_name(),
+            email=faker.email(),
+            age=faker.random_int(min=18, max=100)
+        )
 
     @classmethod
-    def adult(cls) -> dict:
+    def adult(cls) -> User:
         faker = cls._faker()
-        return {
-            "username": faker.user_name(),
-            "email": faker.email(),
-            "age": faker.random_int(min=18, max=65)
-        }
+        return User(
+            username=faker.user_name(),
+            email=faker.email(),
+            age=30
+        )
 
     @classmethod
-    def minor(cls) -> dict:
+    def under_age(cls) -> User:
         faker = cls._faker()
-        return {
-            "username": faker.user_name(),
-            "email": faker.email(),
-            "age": faker.random_int(min=1, max=17)
-        }
+        return User(
+            username=faker.user_name(),
+            email=faker.email(),
+            age=5
+        )
 ```
 
 This mother can now be used in your tests to generate user test data:
 
 ```python
-user_data = UserMother.any()
-adult_user = UserMother.adult()
-minor_user = UserMother.minor()
+user = UserMother.any()
+adult = UserMother.adult()
+under_age = UserMother.under_age()
 ```
+
+Another common approach is to create specific mothers for different concepts of the same class:
+
+```python
+from object_mother import ObjectMother
+
+
+class GeneralUserMother(ObjectMother):
+    @classmethod
+    def any(cls) -> User:
+        faker = cls._faker()
+        return User(
+            username=faker.user_name(),
+            email=faker.email(),
+            age=faker.random_int(min=18, max=100)
+        )
+
+class UserByAgeMother(ObjectMother):
+
+    @classmethod
+    def adult(cls) -> User:
+        faker = cls._faker()
+        return User(
+            username=faker.user_name(),
+            email=faker.email(),
+            age=30
+        )
+
+    @classmethod
+    def under_age(cls) -> User:
+        faker = cls._faker()
+        return User(
+            username=faker.user_name(),
+            email=faker.email(),
+            age=5
+        )
+```
+
+This way it's easier to find the right mother for the right scenario and avoid having a single mother with too many methods.
 
 ### Extending Primitive Mothers
 
@@ -62,149 +101,20 @@ You can also extend existing primitive mothers to add domain-specific generation
 from object_mother import StringPrimitivesMother
 
 
-class EmailMother(StringPrimitivesMother):
+class UserEmailMother(StringPrimitivesMother):
     @classmethod
-    def valid(cls) -> str:
+    def valid(cls) -> UserEmail:
         """Generate a valid email address."""
-        return cls._faker().email()
+        return UserEmail(cls._faker().email())
 
     @classmethod
-    def with_domain(cls, domain: str) -> str:
+    def with_domain(cls, domain: str) -> UserEmail:
         """Generate an email with a specific domain."""
         username = cls._faker().user_name()
-        return f"{username}@{domain}"
-
-    @classmethod
-    def invalid(cls) -> str:
-        """Generate an invalid email (missing @ symbol)."""
-        return cls._faker().word() + cls._faker().word()
+        return UserEmail(f"{username}@{domain}")
 ```
 
-## Creating Mothers for Value Objects
-
-When working with [value objects](../value_objects/index.md), you can create mothers that generate
-value object instances directly:
-
-```python
-from object_mother import ObjectMother
-from value_objects import String, Integer
-
-
-class Email(String):
-    """A value object representing an email address."""
-    pass
-
-
-class Age(Integer):
-    """A value object representing a person's age."""
-    pass
-
-
-class EmailMother(ObjectMother):
-    @classmethod
-    def any(cls) -> Email:
-        """Generate any valid email value object."""
-        return Email(cls._faker().email())
-
-    @classmethod
-    def with_domain(cls, domain: str) -> Email:
-        """Generate an email with a specific domain."""
-        username = cls._faker().user_name()
-        return Email(f"{username}@{domain}")
-
-
-class AgeMother(ObjectMother):
-    @classmethod
-    def any(cls) -> Age:
-        """Generate any valid age."""
-        return Age(cls._faker().random_int(min=0, max=120))
-
-    @classmethod
-    def adult(cls) -> Age:
-        """Generate an adult age (18+)."""
-        return Age(cls._faker().random_int(min=18, max=100))
-
-    @classmethod
-    def child(cls) -> Age:
-        """Generate a child age (0-17)."""
-        return Age(cls._faker().random_int(min=0, max=17))
-```
-
-These mothers can be used in tests to create value objects with appropriate test data:
-
-```python
-email = EmailMother.any()
-corporate_email = EmailMother.with_domain("company.com")
-person_age = AgeMother.adult()
-```
-
-## Creating Mothers for Complex Objects
-
-For more complex domain objects or aggregates, you can create mothers that handle the entire
-object graph:
-
-```python
-from object_mother import ObjectMother, StringPrimitivesMother, IntegerPrimitivesMother
-from dataclasses import dataclass
-
-
-@dataclass
-class Address:
-    street: str
-    city: str
-    postal_code: str
-
-
-@dataclass
-class Person:
-    name: str
-    age: int
-    address: Address
-
-
-class AddressMother(ObjectMother):
-    @classmethod
-    def any(cls) -> Address:
-        faker = cls._faker()
-        return Address(
-            street=faker.street_address(),
-            city=faker.city(),
-            postal_code=faker.postcode()
-        )
-
-
-class PersonMother(ObjectMother):
-    @classmethod
-    def any(cls) -> Person:
-        faker = cls._faker()
-        return Person(
-            name=faker.name(),
-            age=faker.random_int(min=1, max=100),
-            address=AddressMother.any()
-        )
-
-    @classmethod
-    def with_age(cls, age: int) -> Person:
-        """Generate a person with a specific age."""
-        faker = cls._faker()
-        return Person(
-            name=faker.name(),
-            age=age,
-            address=AddressMother.any()
-        )
-
-    @classmethod
-    def with_address(cls, address: Address) -> Person:
-        """Generate a person with a specific address."""
-        faker = cls._faker()
-        return Person(
-            name=faker.name(),
-            age=faker.random_int(min=1, max=100),
-            address=address
-        )
-```
-
-## Composing Mothers
+### Composing Mothers
 
 Object mothers can be composed to create more complex test scenarios:
 
@@ -214,24 +124,24 @@ from object_mother import ObjectMother
 
 class OrderMother(ObjectMother):
     @classmethod
-    def any(cls):
+    def any(cls) -> Order:
         faker = cls._faker()
-        return {
-            "order_id": faker.uuid4(),
-            "customer": PersonMother.any(),
-            "items": [ItemMother.any() for _ in range(faker.random_int(min=1, max=5))],
-            "total": faker.pyfloat(positive=True, min_value=10, max_value=1000)
-        }
+        return Order(
+            order_id=faker.uuid4(),
+            customer=PersonMother.any(),
+            items=[ItemMother.any() for _ in range(3)],
+            total=250
+        )
 
     @classmethod
-    def with_customer(cls, customer):
+    def with_products(cls, quantity: int) -> Order:
         faker = cls._faker()
-        return {
-            "order_id": faker.uuid4(),
-            "customer": customer,
-            "items": [ItemMother.any() for _ in range(faker.random_int(min=1, max=5))],
-            "total": faker.pyfloat(positive=True, min_value=10, max_value=1000)
-        }
+        return Order(
+            order_id=faker.uuid4(),
+            customer=PersonMother.any(),
+            items=[ItemMother.any() for _ in range(quantity)],
+            total=250
+        )
 ```
 
 ## Best Practices
@@ -240,7 +150,7 @@ When creating custom object mothers, follow these best practices:
 
 ### Use Descriptive Names
 
-Name your factory methods to clearly express their purpose:
+Name your factory methods to clearly express the business purpose:
 
 ```python
 # Good
@@ -257,31 +167,17 @@ class UserMother(ObjectMother):
 # Avoid
 class UserMother(ObjectMother):
     @classmethod
-    def type1(cls): ...
+    def status1(cls): ...
     
     @classmethod
-    def type2(cls): ...
-```
-
-### Provide Flexibility
-
-Allow customization of generated data when needed:
-
-```python
-class ProductMother(ObjectMother):
-    @classmethod
-    def any(cls, price: float | None = None, name: str | None = None):
-        faker = cls._faker()
-        return {
-            "name": name or faker.word(),
-            "price": price or faker.pyfloat(positive=True, min_value=1, max_value=1000),
-            "description": faker.text()
-        }
+    def status2(cls): ...
 ```
 
 ### Keep Methods Focused
 
-Each factory method should have a single, clear purpose:
+Each factory method should have a single, clear purpose. Avoid methods that admit too much variability or that allows
+parameters that can generate a wide range of scenarios. If you need more flexibility, consider creating multiple methods 
+instead of one with parameters:
 
 ```python
 class AccountMother(ObjectMother):
@@ -301,26 +197,39 @@ class AccountMother(ObjectMother):
         ...
 ```
 
+### Separate Concerns
+
+If your object mother grows too large or has too many methods, consider splitting it into multiple mothers that focus on 
+different aspects of the domain:
+
+```python
+class UserMother(ObjectMother):
+    @classmethod
+    def any(cls) -> User: ...
+    
+class UserByStatusMother(ObjectMother):
+    @classmethod
+    def active(cls) -> User: ...
+    
+    @classmethod
+    def suspended(cls) -> User: ...
+```
+
 ### Leverage Faker Capabilities
 
-Take advantage of Faker's rich set of providers:
+Take advantage of Faker's rich set of providers when the value is really not relevant and does not affect the result of the test
 
 ```python
 class ArticleMother(ObjectMother):
     @classmethod
     def any(cls):
         faker = cls._faker()
-        return {
-            "title": faker.sentence(),
-            "content": faker.text(max_nb_chars=500),
-            "author": faker.name(),
-            "published_date": faker.date_time_this_year(),
-            "tags": faker.words(nb=3),
-            "url": faker.url()
-        }
+        return Article(
+            title=faker.sentence(),
+            content=faker.text(max_nb_chars=500),
+            author=faker.name(),
+            published_date=faker.date_time_this_year(),
+            tags=faker.words(nb=3),
+            url=faker.url()
+        )
 ```
-
-!!! tip "Reusability"
-    Design your mothers to be reusable across different test suites. Avoid coupling them 
-    to specific test scenarios or assertions.
-
