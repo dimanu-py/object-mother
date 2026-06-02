@@ -1,6 +1,6 @@
 [project]
 name = "object-mother-sindri"
-version = "0.1.0"
+version = "0.0.1"
 description = "Object Mother pattern implementation for Python"
 authors = [{name = "dimanu-py", email = "dimanu.py@gmail.com"}]
 dependencies = [
@@ -47,10 +47,6 @@ repository = "https://github.com/dimanu-py/object-mother/"
 homepage = "https://dimanu-py.github.io/object-mother/home/"
 issues = "https://github.com/dimanu-py/object-mother/issues/"
 
-[project.optional-dependencies]
-build = ["uv >= 0.11.17"]
-
-
 [dependency-groups]
 dev = [
     {include-group = "lint"},
@@ -88,7 +84,6 @@ markers = [
 ]
 testpaths = ["test"]
 
-
 [tool.ruff]
 line-length = 120
 
@@ -104,6 +99,9 @@ quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/object_mother"]
@@ -117,6 +115,8 @@ include = [
     "CITATION.cff",
 ]
 
+[project.optional-dependencies]
+build = ["uv >= 0.11.17"]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
@@ -151,8 +151,3 @@ mode = "update"
 changelog_file = "CHANGELOG.md"
 output_format = "md"
 mask_initial_release = false
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
