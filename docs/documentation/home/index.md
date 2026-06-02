@@ -1,11 +1,11 @@
-# Sindri Object Mother
+#  Object Mother Sindri
 
 <div align="center">
   <strong>Easy use and customizable implementation for the Object Mother pattern.</strong>
 </div>
 
 <div align="center"><table><tr><td>
-Sindri object mother replaces ad hoc test data with a consistent Object Mother toolkit.
+Sindri Object Mother replaces ad hoc test data with a consistent Object Mother toolkit.
 Generate realistic test data for your domain objects with a simple and focused API.
 
 <br><br>
